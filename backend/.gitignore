@@ -1,0 +1,9 @@
+# ไฟล์ขยะของ Frontend
+node_modules/
+.next/
+.DS_Store
+
+# ไฟล์ขยะของ Backend
+venv/
+__pycache__/
+*.pyc
