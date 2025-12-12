@@ -18,7 +18,6 @@ class SentenceSubmission(BaseModel):
     word: str
     sentence: str
 
-# แก้ไขบรรทัดนี้ใน backend/main.py
 
 WORDS_DB = [
     "resilient", 
@@ -49,7 +48,7 @@ async def validate_sentence(submission: SentenceSubmission):
     word = submission.word.lower()
     sentence = submission.sentence.lower()
     
-    # 1. กฎข้อแรก: ต้องมีคำศัพท์นั้นอยู่ในประโยค
+    # 1.ต้องมีคำศัพท์นั้นอยู่ในประโยค
     if word not in sentence:
         return {
             "score": 0,
@@ -58,14 +57,14 @@ async def validate_sentence(submission: SentenceSubmission):
             "corrected_sentence": f"I want to use the word {submission.word} correctly."
         }
 
-    # 2. คำนวณคะแนนจากความยาวประโยค (ยิ่งยาวยิ่งดี สูงสุด 9.5)
+    # 2.คำนวณคะแนนจากความยาวประโยค
     length_score = min(9.5, len(sentence.split()) * 1.5)
     
-    # ปรับคะแนนให้ดูสมจริงขึ้น (สุ่มบวกลบนิดหน่อย)
+    # ปรับคะแนนให้ดูสมจริงมากขึ้น
     final_score = round(length_score + random.uniform(-0.5, 0.5), 1)
     if final_score > 10: final_score = 10.0
 
-    # 3. ประเมินระดับ (Level)
+    # 3. ประเมินระดับ(Level)
     level = "Beginner"
     if final_score > 5: level = "Intermediate"
     if final_score > 8: level = "Advanced"

@@ -16,7 +16,7 @@ export default function Home() {
   const [feedback, setFeedback] = useState<Feedback | null>(null);
   const [loading, setLoading] = useState(false);
 
-  // ดึงคำศัพท์จาก Backend เมื่อเข้าเว็บ
+  // ดึงคำศัพท์จาก Backend
   useEffect(() => {
     axios.get('http://localhost:8000/api/word')
       .then(res => setWord(res.data.word))
